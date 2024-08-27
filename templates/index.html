@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+    <h1>Current Controls</h1>
+    <ul>
+        {% for control in controls %}
+            <li><strong>{{ control.name }}</strong>: {{ control.description }}</li>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}

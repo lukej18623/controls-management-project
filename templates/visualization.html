@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}Visualization{% endblock %}
+{% block content %}
+
+<h1>Control Data Visualization</h1>
+
+<div id="alert-container"></div>
+
+<form method="POST" action="{{ url_for('visualization') }}" id="visualization-form">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.criteria.label(class="form-label") }}
+        {{ form.criteria(class="form-control", id="criteria") }}
+    </div>
+    <div class="mb-3" id="date-fields">
+        {{ form.start_date.label(class="form-label") }}
+        {{ form.start_date(class="form-control", id="start_date") }}
+        {{ form.end_date.label(class="form-label") }}
+        {{ form.end_date(class="form-control", id="end_date") }}
+    </div>
+    <div class="mb-3">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+
+{% if plot_url %}
+
+    {% if chart_type == 'bar' %}
+        <h2 style="text-align: center;">Bar Chart</h2>
+    {% elif chart_type == 'pie' %}
+        <h2 style="text-align: center;">Pie Chart</h2>
+    {% elif chart_type == 'timeline' %}
+        <h2 style="text-align: center;">Timeline</h2>
+    {% endif %}
+    
+    <div class="centered-image">
+        <img src="data:image/png;base64,{{ plot_url }}" alt="Chart">
+    </div>
+
+{% endif %}
+
+{% endblock %}
